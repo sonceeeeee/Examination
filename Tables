@@ -1,0 +1,50 @@
+CREATE TABLE Users(
+    UserID CHAR(7),
+    LastName VARCHAR(255),
+    FirstName VARCHAR(255) not null,
+    School VARCHAR(255),
+    AddressS VARCHAR(255) not null,
+    Email VARCHAR(255) not null,
+    PhoneNumber CHAR(30) not null,
+    Locat VARCHAR(255),
+    DateOfBirth VARCHAR(255) not null,
+    Gender VARCHAR(25) not null,
+
+    CONSTRAINT CheckEmail
+        CHECK(Email = '%a%'),
+    CONSTRAINT UsersPK PRIMARY KEY (UserId)
+)
+
+CREATE TABLE Posts(
+    UserID CHAR(7),
+    PostID INT,
+    PostDate CHAR(30) not null,
+    PostContent VARCHAR(255) not null,
+
+    CONSTRAINT PostsPKUserId PRIMARY KEY (PostId),
+    CONSTRAINT PostsFKUserId FOREIGN KEY (UserId) REFERENCES Users(UserId)
+        ON UPDATE CASCADE ON DELETE NO ACTION,
+
+)
+
+CREATE TABLE Page(
+       PageId CHAR (7),
+	   PageName VARCHAR (255),
+	   PageContent VARCHAR (255),
+
+	   CONSTRAINT PostPKPageID primary key (PageId)
+	   
+)
+
+
+
+CREATE TABLE Comments(
+   
+    UserID CHAR(7),
+    PostID INT not null,
+    CommentId CHAR(30),
+	CommentContent VARCHAR(255) not null,
+
+	CONSTRAINT CommentsPKUserID primary key (UserID),
+       
+)
